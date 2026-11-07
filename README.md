@@ -143,10 +143,11 @@ chmod +x scripts/scpsl-optimizer.sh
 ./scripts/scpsl-optimizer.sh
 ```
 
-### 🛡️ 安全与恢复保障：
+### 🛡️ 安全、恢复与反作弊守则：
 - **自动备份**：脚本在执行修改前，会自动将你的原配置文件备份为：  
   `SCPSL_Data/boot.config.backup_时间戳`；
-- **一键恢复**：若想恢复原貌，只需将备份文件重新覆盖回 `boot.config` 即可，绝不破坏原有游戏完整性。
+- **一键恢复**：若想恢复原貌，只需将备份文件重新覆盖回 `boot.config` 即可，绝不破坏原有游戏完整性；
+- **公平竞技声明**：本项目所有修改仅为 Unity 官方引擎参数调优与 Wayland 窗口显示调度，绝不涉及内存修改、外挂注入或破坏游戏公平性，严格遵循游戏发行方 EULA。完整规范详见 [全局免责声明与通用安全规范 (Disclaimer)](https://github.com/shenchuchu91-hub/disclaimer)。
 
 ---
 

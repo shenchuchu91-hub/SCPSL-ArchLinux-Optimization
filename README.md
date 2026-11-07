@@ -8,63 +8,68 @@
     <img src="https://img.shields.io/badge/Game-SCP%3A%20Secret%20Laboratory-ff5555?style=for-the-badge&logo=steam&logoColor=white" />
     <img src="https://img.shields.io/badge/Played_Hours-350%2B_Hours-50fa7b?style=for-the-badge&logo=clockify&logoColor=white" />
     <img src="https://img.shields.io/badge/OS-Arch%20%7C%20Nyarch%20Linux-1793d1?style=for-the-badge&logo=arch-linux&logoColor=white" />
-    <img src="https://img.shields.io/badge/FPS-320_FPS_Unlocked-bd93f9?style=for-the-badge&logo=speedtest&logoColor=white" />
+    <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" />
     <img src="https://img.shields.io/badge/Author-shenchuchu91--hub-ff79c6?style=for-the-badge" />
   </p>
 
   <p align="center">
-    <i>🎯 一位 357 小时实战老玩家的深度调教心法：解决准星偏移、榨干 CPU 多核性能、突破 320 FPS！ 🎯</i>
+    <i>🎯 基于 350+ 小时实操验证：解决 Wayland 准星偏移脱节、Unity 多核调度优化与帧率上限解锁实录 🎯</i>
   </p>
 
 </div>
 
 ---
 
-## 📑 核心避坑与调优目录
+## 💻 硬件测试环境与参考配置 (Hardware Specs & Test Environment)
 
-- [🎯 痛点一：为什么准星不能对中？鼠标偏移物理脱节的唯一正解](#-痛点一为什么准星不能对中鼠标偏移物理脱节的唯一正解)
-- [📂 痛点二：bootconfig 在哪里？如何找到并修改？](#-痛点二bootconfig-在哪里如何找到并修改)
-- [⚡ 痛点三：bootconfig 满血调优参数深度剖析](#-痛点三bootconfig-满血调优参数深度剖析)
-- [🚀 痛点四：Steam 黄金启动项参数 (直上 320 FPS)](#-痛点四steam-黄金启动项参数-直上-320-fps)
-- [🌐 新人必看：默认英文如何切换简体中文？](#-新人必看默认英文如何切换简体中文)
-- [🛠️ 附赠：一键自动备份与多核配置脚本](#-附赠一键自动备份与多核配置脚本)
+为了确保本项目的**可复现性与测试严谨度**，下表列出作者的实际验证环境以及建议的运行基准：
+
+| 项目 | 本文测试验证机型 (Tested Environment) | 建议最低运行配置 (Minimum Requirements) |
+| :--- | :--- | :--- |
+| **操作系统** | Nyarch Linux x86_64 (Linux Kernel 7.x, Wayland / Niri) | Arch Linux 及常见 Linux 衍生版 |
+| **处理器 (CPU)** | 13th Gen Intel Core i7-13620H (16 Threads) | 4 核心 8 线程以上 64 位处理器 |
+| **显卡 (GPU)** | NVIDIA GeForce RTX 5060 Laptop (驱动版本: 615.78+) | 支持 Vulkan 1.3 的独立显卡或现代核显 |
+| **屏幕规格** | 1080p @ 144Hz IPS 高刷新率屏 | 1080p @ 60Hz 标准显示设备 |
+| **内存 (RAM)** | 16 GB DDR5 | 8 GB RAM |
+
+> 📌 *说明：文中所有调优效果与启动项参数（如 320 FPS 帧率上限）均为**作者在上述实测机型中的测试记录**。不同机器的硬件规格、驱动版本及桌面协议有所不同，读者可根据自身配置酌情适配。*
 
 ---
 
 ## 🎯 痛点一：为什么准星不能对中？鼠标偏移物理脱节的唯一正解
 
-在 Linux（无论是 Wayland、X11 还是 Niri 桌面）下玩《SCP: 秘密实验室》（SCPSL），许多玩家都会遇到一个让人极其崩溃的致命 Bug：
-- **准星严重偏离屏幕中心**；
+在 Linux（特别是 Wayland 会话与平铺桌面环境）下玩《SCP: 秘密实验室》（SCPSL），许多玩家都会遇到一个让人极其崩溃的致命 Bug：
+- **准星偏离屏幕物理中心**；
 - 鼠标点击的位置和实际视线准星完全脱节；
-- 对枪打不到人，操作手感极度别扭！
+- 开枪手感极度别扭，无法精准命中目标！
 
-### 🔍 根本原因揭秘：
-在 Linux 下，Unity 引擎在**独占全屏 (Exclusive Fullscreen)** 模式下捕获鼠标指针限制（Pointer Constraint）时，会出现视口与桌面缩放坐标系错位。
+### 🔍 根本原因分析：
+在 Linux Wayland 下，Unity 引擎在**独占全屏 (Exclusive Fullscreen)** 模式下调用系统指针限制（Pointer Constraint / Cursor Lock）时，容易出现视口分辨率与桌面缩放坐标系错位。
 
-### 🌟 独家解决方案（血泪经验）：
-进入游戏「设置」 -> 「视频 (Video)」 -> **显示模式【千万不能选全屏 (Fullscreen)】！**
+### 🌟 验证有效的解决方案：
+进入游戏「设置 (Settings)」 -> 「视频 (Video)」 -> **显示模式【千万不要选择全屏 (Fullscreen)】！**
 
 > ✅ **必须选择：【无边框窗口化 (Borderless Windowed)】！**
 
-选完无边框窗口化后，搭配 Wayland / Niri 的自动平铺与居中，准星瞬间**绝对对中、鼠标精准归位，开枪手感完全拉满**！
+选完无边框窗口化后，搭配 Wayland / Niri 的自动居中与平铺机制，准星在作者测试环境下**瞬间绝对对中、鼠标精准归位，手感完全恢复正常**！
 
 ---
 
 ## 📂 痛点二：boot.config 在哪里？如何找到并修改？
 
-不少新手听说改 `boot.config` 能大幅提升帧率，但根本找不到这个文件藏在什么地方。其实在 Steam 里找它非常容易：
+在 Steam 客户端中定位该文件非常简单：
 
 1. 打开 Steam 客户端，在左侧游戏库中找到 **《SCP秘密实验室 / SCP: Secret Laboratory》**；
 2. **鼠标右键点击游戏** -> 鼠标悬停在 **「管理 (Manage)」** 上 -> 点击 **「浏览本地文件 (Browse local files)」**；
-3. 系统文件管理器会自动弹开游戏安装主目录；
+3. 系统文件管理器会自动打开游戏根目录；
 4. 双击进入 **`SCPSL_Data`** 文件夹；
-5. 你就会在这个文件夹里看到名为 **`boot.config`** 的配置文件！
+5. 你就会在这个文件夹里看到名为 **`boot.config`** 的配置文件。
 
 ---
 
 ## ⚡ 痛点三：boot.config 满血调优参数深度剖析
 
-用任意文本编辑器打开 `SCPSL_Data/boot.config`，将其全部内容替换为以下经过 350+ 小时实战验证的极致优化配置：
+用任意文本编辑器打开 `SCPSL_Data/boot.config`，将其修改为以下参数：
 
 ```ini
 gfx-enable-native-gfx-jobs=1
@@ -81,21 +86,21 @@ scripting-runtime-version=latest
 vr-enabled=0
 ```
 
-### 🔬 各项核心参数解析：
+### 🔬 核心参数解析：
 - **`job-worker-count=6`**：
-  > ⚠️ **核心关键**：后面的数值请根据你自己的 **CPU 物理大核/线程数** 填写！比如 6 核心填 6，8 核心填 6-8，能让多核 CPU 满载参与游戏运算，彻底告别单核满载掉帧！
+  > ⚠️ **核心关键**：后面的数值请根据你自己的 **CPU 物理大核/线程数** 填写！作者在 i7-13620H 上测试填 6，读者 8 核机型可填 6-8，能让多核 CPU 充分参与多线程任务调度，缓解单核跑满导致的偶发掉帧；
 - **`gfx-enable-native-gfx-jobs=1` & `gfx-enable-gfx-jobs=1`**：
-  开启引擎底层的原生图形工作调度线程，极大减轻主线程渲染负载；
+  开启引擎底层的原生图形工作调度线程，减轻主线程渲染负载；
 - **`gc-max-time-slice=1`**：
-  将 Unity 内存垃圾回收的时间片限制在 1ms，**消除突然遇到大量怪物或混战时卡顿 1 秒的瞬时大掉帧**；
+  将 Unity 内存垃圾回收的时间片限制在 1ms，在作者测试中有效减轻了遭遇大量怪物或混战时的瞬时大掉帧；
 - **`hdr-display-enabled=0` & `vr-enabled=0`**：
-  禁用无用的 HDR 与 VR 监测，节省显存与着色器算力开销；
+  禁用无用的 HDR 与 VR 监测，减少不必要的管线开销；
 - **`wait-for-managed-debugger=0`**：
   关闭调试器等待，加快加载进图速度。
 
 ---
 
-## 🚀 痛点四：Steam 黄金启动项参数 (直上 320 FPS)
+## 🚀 痛点四：Steam 推荐启动项参数
 
 在 Steam 库中**右键游戏 -> 点击「属性」 -> 在「常规」标签页最下方的「启动选项」输入框**中填入：
 
@@ -103,30 +108,30 @@ vr-enabled=0
 -quality 0 accuracystats -gfx-disable-vsync -disable-assembly-update-check -screen-fullscreen 0 -targetFrameRate 320
 ```
 
-### 启动项详解：
-- `-targetFrameRate 320`：突破默认 60 帧/引擎帧率限制，解锁最高 320 FPS 超丝滑高刷！
-- `-screen-fullscreen 0`：强制启动为窗口/无边框模式，从根源杜绝全屏准星偏移 Bug！
-- `-gfx-disable-vsync`：彻底关闭垂直同步，降低输入延迟；
-- `-disable-assembly-update-check`：关闭程序集热更新检查，秒级进入游戏大厅；
-- `accuracystats`：开启精准命中与网络同步统计。
+### 启动项说明：
+- `-targetFrameRate 320`：解锁引擎帧率上限（作者在 144Hz 高刷屏测试上限设为 320，读者亦可设为 144 或 240）；
+- `-screen-fullscreen 0`：启动时强制采用窗口模式，避免全屏指针错位；
+- `-gfx-disable-vsync`：关闭垂直同步，降低输入延迟；
+- `-disable-assembly-update-check`：跳过程序集热检查，提升启动效率；
+- `accuracystats`：开启命中与网络同步状态输出。
 
 ---
 
 ## 🌐 新人必看：默认英文如何切换简体中文？
 
-新安装的 SCPSL 默认界面是全英文，不要慌：
+新安装的 SCPSL 默认界面为全英文：
 
 1. 启动游戏进入主菜单；
 2. 点击右上角的 **齿轮设置图标 (Settings)**；
 3. 选择 **「Language（语言）」** 选项卡；
 4. 在语言下拉列表中选择 **「简体中文 (Simplified Chinese)」**；
-5. 点击确认，整个游戏从角色技能、物品说明到系统菜单立刻全部中文化！
+5. 点击确认，游戏界面立刻全部中文化。
 
 ---
 
-## 🛠️ 附赠：一键自动备份与多核配置脚本
+## 🛠️ 附赠：自动化脚本与安全恢复说明
 
-如果你不想手动翻目录查找，可以使用本仓库为你准备好的自动化脚本：
+为提高可操作性，本仓库提供了一键检测与配置脚本：
 
 ```bash
 # 1. 克隆本仓库
@@ -138,18 +143,19 @@ chmod +x scripts/scpsl-optimizer.sh
 ./scripts/scpsl-optimizer.sh
 ```
 
-> **该脚本会自动**：
-> 1. 自动探查你的 Steam 库并定位 `SCPSL_Data`；
-> 2. 自动根据时间戳安全备份你的原有 `boot.config`；
-> 3. 自动读取你当前 CPU 的真实核心数并写入匹配的工作线程数！
+### 🛡️ 安全与恢复保障：
+- **自动备份**：脚本在执行修改前，会自动将你的原配置文件备份为：  
+  `SCPSL_Data/boot.config.backup_时间戳`；
+- **一键恢复**：若想恢复原貌，只需将备份文件重新覆盖回 `boot.config` 即可，绝不破坏原有游戏完整性。
 
 ---
 
 <div align="center">
 
-🌸 **献给所有深爱 SCPSL 的 Arch Linux 玩家** 🌸  
-收容失效，但准星绝不偏移！
+🌸 **版权与许可** 🌸  
+本项目基于 [MIT License](LICENSE) 开源发布。  
+欢迎根据自身硬件反馈测试数据！
 
-<sub>Made with 💖 by <b>shenchuchu91-hub</b> (357h Veteran)</sub>
+<sub>Made with 💖 by <b>shenchuchu91-hub</b></sub>
 
 </div>

@@ -17,7 +17,7 @@ echo -e "${C_PINK}"
 cat << 'EOF'
   [+]========================================================[+]
    |   🎯 SCP: Secret Laboratory Linux Optimizer (SCPSL)    |
-   |   350+ 小时实战老玩家经验沉淀 · boot.config 满血调优   |
+   |   老玩家实战经验整理 · boot.config 多核分配与渲染优化   |
   [+]========================================================[+]
 EOF
 echo -e "${C_RESET}"
@@ -99,14 +99,14 @@ echo -e "${C_GREEN}[✔] 优化版 boot.config 写入成功！${C_RESET}"
 
 # 5. 输出启动项与准星避坑提示
 echo -e "\n${C_PINK}====================================================${C_RESET}"
-echo -e "${C_BOLD}🎯 必须注意的准星对中与设置关键（老玩家血泪经验）:${C_RESET}"
-echo -e "${C_YELLOW}1. 准星对中 Bug 核心解法：${C_RESET}"
-echo -e "   进入游戏后，【显示模式】${C_RED}千万不能选择全屏独占 (Fullscreen)${C_RESET}！"
-echo -e "   必须选择 ${C_GREEN}【无边框窗口化 (Borderless Windowed)】${C_RESET}，否则准星会出现物理偏移/鼠标脱离！"
+echo -e "${C_BOLD}🎯 准星校准与推荐运行设置:${C_RESET}"
+echo -e "${C_YELLOW}1. 准星对中解决方案：${C_RESET}"
+echo -e "   进入游戏后，【显示模式】建议选择 ${C_GREEN}【无边框窗口化 (Borderless Windowed)】${C_RESET}。"
+echo -e "   这可以彻底避免 Wayland 环境下全屏独占导致的视口坐标缩放与鼠标脱节问题。"
 echo ""
 echo -e "${C_YELLOW}2. 默认语言调整：${C_RESET}"
-echo -e "   首次进入游戏如果显示英文，点击右上角设置 (Settings) -> 语言 (Language) -> 选择「简体中文」即可。"
+echo -e "   首次进入游戏若显示英文，点击右上角设置 (Settings) -> 语言 (Language) -> 选择「简体中文」即可。"
 echo ""
-echo -e "${C_YELLOW}3. 推荐 Steam 黄金启动项参数 (右键游戏 -> 属性 -> 启动选项):${C_RESET}"
+echo -e "${C_YELLOW}3. 推荐 Steam 启动选项参数 (右键游戏 -> 属性 -> 启动选项):${C_RESET}"
 echo -e "${C_GREEN}-quality 0 accuracystats -gfx-disable-vsync -disable-assembly-update-check -screen-fullscreen 0 -targetFrameRate 320${C_RESET}"
 echo -e "${C_PINK}====================================================${C_RESET}\n"

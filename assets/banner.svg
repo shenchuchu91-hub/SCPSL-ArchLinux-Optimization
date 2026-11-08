@@ -69,8 +69,8 @@
 
   <!-- 中间文字区域 -->
   <g transform="translate(170, 0)">
-    <text x="0" y="85" class="title">✨ SCPSL (秘密实验室) Linux 优化与准星避坑 ✨</text>
-    <text x="0" y="125" class="subtitle">🌸 350+ 小时老玩家实战心得 · boot.config 满血调优 · 准星对中全解 🌸</text>
+    <text x="0" y="85" class="title">✨ SCPSL (秘密实验室) Linux 运行优化与准星校准 ✨</text>
+    <text x="0" y="125" class="subtitle">🌸 Linux / Wayland 环境性能调优 · boot.config 多核分配 · 准星对中方案 🌸</text>
 
     <!-- 标签胶囊 -->
     <g transform="translate(0, 155)">
@@ -78,7 +78,7 @@
       <text x="65" y="17" text-anchor="middle" fill="#ff79c6" class="badge-txt">🎯 准星无边框对中</text>
 
       <rect x="140" y="0" width="125" height="26" rx="13" fill="#282a36" stroke="#50fa7b" stroke-width="1"/>
-      <text x="202" y="17" text-anchor="middle" fill="#50fa7b" class="badge-txt">⚡ 320 FPS 启动项</text>
+      <text x="202" y="17" text-anchor="middle" fill="#50fa7b" class="badge-txt">⚡ 高刷与启动项调优</text>
 
       <rect x="275" y="0" width="135" height="26" rx="13" fill="#282a36" stroke="#8be9fd" stroke-width="1"/>
       <text x="342" y="17" text-anchor="middle" fill="#8be9fd" class="badge-txt">🔧 boot.config 多核</text>
@@ -87,6 +87,6 @@
       <text x="472" y="17" text-anchor="middle" fill="#f1fa8c" class="badge-txt">🎮 Wayland 畅玩</text>
     </g>
 
-    <text x="0" y="215" fill="#a6e3a1" font-family="monospace" font-size="12.5">&gt; "实测 357 小时踩坑总结：拒绝全屏漂移，找回精准手感！"</text>
+    <text x="0" y="215" fill="#a6e3a1" font-family="monospace" font-size="12.5">&gt; "老玩家实战配置整理：解决视口漂移，改善多核运行流畅度"</text>
   </g>
 </svg>

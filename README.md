@@ -4,22 +4,6 @@ scp:sl engine tuning on arch linux. vulkan prime offload, framerate lock, input 
 
 ---
 
-## 硬件测试环境与参考配置 (Hardware Specs & Test Environment)
-
-为便于评估方案的适用性与复现条件，下表列出了本文档所基于的**测试验证环境**与建议的**最低运行基准**：
-
-| 项目 | 测试验证参考规格 (Tested Environment) | 最低运行参考门槛 (Minimum Requirements) |
-| :--- | :--- | :--- |
-| **操作系统** | Nyarch Linux x86_64 (Linux Kernel 7.x, Wayland / Niri) | Arch Linux 及常见 Linux 64 位发行版 |
-| **处理器 (CPU)** | 13th Gen Intel Core i7-13620H (16 线程) | 4 核心 8 线程以上 64 位处理器 |
-| **显卡 (GPU)** | NVIDIA GeForce RTX 5060 Laptop (驱动版本: 615.78+) | 支持 Vulkan 1.3 的独立显卡或现代核显 |
-| **屏幕规格** | 1080p @ 144Hz IPS 高刷新率屏 | 1080p @ 60Hz 标准显示设备 |
-| **运行内存** | 16 GB DDR5 | 8 GB RAM |
-
-> *说明：文中涉及的参数调优与启动项设置均在上述实测机型中验证稳定。不同硬件规格与驱动版本可能存在细微差异，建议结合个人设备实际情况配置。*
-
----
-
 ## 一、准星偏移与指针脱节排查 (Crosshair Offset Fix)
 
 在 Linux（特别是 Wayland 会话与平铺式窗口管理器）环境下运行 SCPSL 时，常见问题之一是准星与物理鼠标光标脱节，导致射击落点偏移。

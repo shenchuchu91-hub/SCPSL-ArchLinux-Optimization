@@ -1,3 +1,9 @@
+<div align="center">
+  <img src="./assets/banner.svg" width="100%" alt="Monochrome Banner"/>
+</div>
+
+---
+
 # scpsl-archlinux-optimization
 
 scp:sl engine tuning on arch linux. vulkan prime offload, framerate lock, input fix.
@@ -111,4 +117,8 @@ chmod +x scripts/scpsl-optimizer.sh
 
 ---
 
+---
 
+<div align="center">
+  <sub>雨声未停 · 保持冷清 · 独行其道</sub>
+</div>
